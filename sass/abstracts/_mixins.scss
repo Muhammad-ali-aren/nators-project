@@ -1,0 +1,61 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin AbsCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//media query manager
+/*
+0      -     600px   mobile
+600px  -     900px   tablet portrait
+900px  -     1200px   tablet landscape
+[1200px  -     1800px]   is where our normal style apply
+1800: +            big desktops
+*/
+// the content let you pass any block of code into mixin which then it will paste it where it is called and if directive is same as if statement
+
+@mixin respond-phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+/*arguments for respond mixin
+- mobile
+- tab-port
+- tab-land
+- big-desktop
+1em = 16px so 600/16 = 37.5em
+so in media quries rem and em are related to font size of which is coming from browers which is 16px by defalut
+ well use em cause rem fails in some browers and it is experimented by some ppl who are really good at these.
+*/
+@mixin respond($breakPoint) {
+  @if ($breakPoint == phone) {
+    @media (max-width: 37.5em) { //600px
+      @content;
+    }
+  }
+  @if ($breakPoint == tab-port) {
+    @media (max-width: 56.25em) {   //900px
+      @content;
+    }
+  }
+  @if ($breakPoint == tab-land) {
+    @media (max-width: 75em) {  //1200px
+      @content;
+    }
+  }
+  @if ($breakPoint == big-desktop) {
+    @media (min-width: 112.5em) {   //1800px
+      @content;
+    }
+  }
+}

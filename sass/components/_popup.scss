@@ -1,0 +1,115 @@
+.popup {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba($color-dark, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20rem;
+  z-index: 20000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  backdrop-filter: blur(1rem);
+
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+  &__content {
+    width: 75%;
+    background-color: white;
+    box-shadow: 0 2rem 4rem rgba($color-dark, 0.2);
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+
+    @include respond(phone) {
+      width: 90%;
+      padding: 0 0 20rem 0;
+    }
+  }
+  &__left {
+    width: 33.3333%;
+    display: table-cell;
+
+    @include respond(phone) {
+      width: 100%;
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  &__right {
+    width: 66.6667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 2rem 5rem;
+    @include respond(phone) {
+      width: 100%;
+      display: block;
+      vertical-align: top;
+    }
+  }
+  &__image {
+    display: block;
+    width: 110%;
+    height: 25rem;
+    @include respond(tab-port) {
+      margin: 2rem;
+      height: 22.5rem;
+      width: 100%;
+    }
+
+    @include respond(phone) {
+      float: right;
+      margin: 0;
+      height: 20rem;
+      width: 50%;
+    }
+  }
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid $color-grey-light-2;
+    hyphens: auto;
+    @include respond(phone) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &:target &__content {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close {
+    font-size: 3rem;
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    &:hover,
+    &:active {
+      color: $color-primary;
+    }
+  }
+}
